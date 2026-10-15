@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Presentation Template</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+
+<!-- ═════════════ 1 · Title: full-bleed canvas behind the text, no footer -->
+<section class="slide title-slide nofoot" id="s-title">
+  <canvas id="title-waves"></canvas>
+  <div class="inner">
+    <div class="venue">Venue &nbsp;·&nbsp; Date</div>
+    <h1>A Minimal <em>Presentation</em> Template</h1>
+    <div class="sub">Plain HTML, CSS and JavaScript. No build step.</div>
+  </div>
+  <div class="who">
+    <b>Your Name</b><br>
+    Affiliation
+  </div>
+  <div class="hint"><kbd>←</kbd> <kbd>→</kbd> navigate &nbsp; <kbd>1</kbd>–<kbd>2</kbd> sections &nbsp; <kbd>F</kbd> fullscreen &nbsp; <kbd>C</kbd> pointer</div>
+</section>
+
+<!-- ═════════════ 2 · Two columns: list revealed step by step, SVG figure built up alongside -->
+<section class="slide" id="s-columns" data-sec="layouts">
+  <h2>Two columns, <em>step by step</em></h2>
+  <div class="row" style="gap:64px;margin-top:6px">
+    <div class="grow">
+      <div class="items">
+        <div data-step="1" class="rise">Anything with <span class="mono" style="display:inline;font-size:16px;color:var(--accent)">data-step="n"</span> appears on step <i>n</i><span>Press → to reveal the next element on this slide</span></div>
+        <div data-step="2" class="rise">SVG elements step in the same way<span>The figure on the right is built from three steps</span></div>
+        <div data-step="3" class="rise"><span class="mono" style="display:inline;font-size:16px;color:var(--accent)">data-until="m"</span> hides it again<span>Useful for swapping one element for another</span></div>
+      </div>
+      <div class="swap" style="margin-top:24px">
+        <div class="callout blue" data-step="3" data-until="4">This box is visible on step 3 only…</div>
+        <div class="callout green" data-step="4">…and this one replaces it on step 4.</div>
+      </div>
+    </div>
+    <figure class="fig" style="width:440px;flex:none">
+      <svg viewBox="0 0 440 340">
+        <defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--faint)"/></marker></defs>
+        <g data-step="1">
+          <circle cx="80" cy="90" r="52" fill="var(--blue-bg)" stroke="var(--blue)" stroke-width="1.5"/>
+          <text x="80" y="96" text-anchor="middle" font-size="17" fill="var(--blue)">Text</text>
+        </g>
+        <g data-step="2">
+          <line x1="132" y1="90" x2="300" y2="90" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arr)"/>
+          <circle cx="360" cy="90" r="52" fill="var(--amber-bg)" stroke="var(--amber)" stroke-width="1.5"/>
+          <text x="360" y="96" text-anchor="middle" font-size="17" fill="var(--amber)">Model</text>
+        </g>
+        <g data-step="3">
+          <line x1="330" y1="135" x2="250" y2="225" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arr)"/>
+          <line x1="190" y1="225" x2="110" y2="135" stroke="var(--faint)" stroke-width="1.5" marker-end="url(#arr)"/>
+          <circle cx="220" cy="262" r="52" fill="var(--coral-bg)" stroke="var(--coral)" stroke-width="1.5"/>
+          <text x="220" y="268" text-anchor="middle" font-size="17" fill="var(--coral)">Reading</text>
+        </g>
+      </svg>
+      <figcaption data-step="3">Figure caption, revealed with the last step.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ═════════════ 3 · Quote and three cards -->
+<section class="slide" id="s-quote" data-sec="layouts">
+  <div class="quote"><span class="mark">“</span>A slide should carry one idea. Everything else on it is there to help that idea land.<span class="mark">”</span></div>
+  <div class="quote-src">Placeholder attribution, <i>Some Book</i> (2026), p. 1</div>
+  <div class="rule"></div>
+  <div class="cards">
+    <div class="card" data-step="1"><div class="n">01</div><div class="h">Type</div><div class="b">A serif for headings, a sans for running text, a mono for labels. All three are vendored, so the deck works offline.</div></div>
+    <div class="card" data-step="2"><div class="n">02</div><div class="h">Colour</div><div class="b">Every colour is a CSS variable on <span class="mono">:root</span>. Change <span class="mono">--accent</span> and the whole deck follows.</div></div>
+    <div class="card" data-step="3"><div class="n">03</div><div class="h">Space</div><div class="b">A fixed 1280×720 stage, scaled to the window. What you lay out is exactly what the audience sees.</div></div>
+  </div>
+</section>
+
+<!-- ═════════════ 4 · Dark slide with an interactive hook (see slides.js) -->
+<section class="slide dark" id="s-interactive" data-sec="interaction">
+  <h2>Interactive <em>hooks</em></h2>
+  <div class="row" style="gap:72px;margin-top:4px">
+    <div class="grow">
+      <div class="label" style="margin-bottom:12px">Next word after …</div>
+      <div class="pills" id="nw-pills"></div>
+      <div class="bars" id="nw-bars" style="margin-top:30px"></div>
+    </div>
+    <div style="width:300px;flex:none;padding-top:34px">
+      <div class="label">Top choice</div>
+      <div class="big-num" id="nw-top">—</div>
+      <p class="body" style="font-size:17px;margin-top:14px">Click a context or press <kbd>↑</kbd> <kbd>↓</kbd>. The slide's <span class="mono">render()</span> hook redraws the bars on every change.</p>
+      <p class="body" style="font-size:17px;margin-top:14px" data-step="1">On step 1 the winning bar is highlighted.</p>
+    </div>
+  </div>
+  <div class="src">Made-up probabilities, for illustration only.</div>
+</section>
+
+</div>
+
+<script>
+window.DECK = { project: 'Project · Lab', title: 'A Minimal Presentation Template' };
+window.SECTIONS = [
+  { id: 'layouts', name: 'Layouts' },
+  { id: 'interaction', name: 'Interaction' },
+];
+</script>
+<script src="slides.js"></script>
+<script src="deck.js"></script>
+</body>
+</html>
