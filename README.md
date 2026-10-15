@@ -2,6 +2,8 @@
 
 A small template for slide decks written in plain HTML, CSS and JavaScript. You don't need a build step, a framework or an internet connection: open `index.html` in a browser and present.
 
+**[Live demo →](https://mcjkurz.github.io/pre-template/)**
+
 - Fixed **1280×720 stage**, scaled to fit any window, so the layout you design is the layout the audience sees
 - **Step-by-step reveals** with one attribute (`data-step="n"`)
 - **Per-slide hooks** for animation and interactivity
